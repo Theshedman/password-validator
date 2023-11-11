@@ -6,10 +6,4 @@ public class PasswordValidationConflictException extends IllegalArgumentExceptio
 
         super(message);
     }
-
-
-    public PasswordValidationConflictException(String message, Throwable cause) {
-
-        super(message, cause);
-    }
 }
