@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Refactor validators and improve error messaging&#10;&#10;Updated validators for clarity and improved their error messages. Minor naming changes have also been made to improve readability and understanding of the code. PasswordValidatorTest has been updated as a part of these changes.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +44,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "JUnit.PasswordValidatorTest.executor": "Coverage",
+    "JUnit.PasswordValidatorTest.executor": "Run",
     "JUnit.PasswordValidatorTest.getValidatorValue.executor": "Run",
     "JUnit.PasswordValidatorTest.minimumLength.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
@@ -141,7 +142,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="33417000" />
+      <workItem from="1699661718801" duration="35030000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -207,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699739815752</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction.">
+      <option name="closed" value="true" />
+      <created>1699740296200</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699740296200</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -229,6 +238,7 @@
     <MESSAGE value="Add LowerCaseValidator, update tests and refactor &#10;&#10;Implemented a new class, LowerCaseValidator, to validate the minimum number of lowercase letters in passwords. Revised the PasswordValidatorTest to include corresponding tests for lowercase validation. Some minor alterations were also made in the UpperCaseValidator class." />
     <MESSAGE value="Add LowerCaseValidator and corresponding tests&#10;&#10;Added a new LowerCaseValidator class to validate the minimum number of lowercase letters in passwords. Updated the PasswordValidatorTest to include tests for this new validator. Made minor adjustments to the UpperCaseValidator test methodology for consistency." />
     <MESSAGE value="Refactor validators and improve error messaging&#10;&#10;Updated validators for clarity and improved their error messages. Minor naming changes have also been made to improve readability and understanding of the code. PasswordValidatorTest has been updated as a part of these changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor validators and improve error messaging&#10;&#10;Updated validators for clarity and improved their error messages. Minor naming changes have also been made to improve readability and understanding of the code. PasswordValidatorTest has been updated as a part of these changes." />
+    <MESSAGE value="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction." />
+    <option name="LAST_COMMIT_MESSAGE" value="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction." />
   </component>
 </project>

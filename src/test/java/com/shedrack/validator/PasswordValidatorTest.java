@@ -30,25 +30,25 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @ParameterizedTest(name = "[{index}] password={0}, minLength={1}, expected={2}")
     @MethodSource(value = "MinLengthValidatorData")
     @DisplayName("Should Not Be Less Than Min Length")
-    public void minimumLengthValidation(Password password, int minLength, ValidationResult expected) {
+    public void minimumLengthValidation(String password, int minLength, boolean expected) {
         PasswordValidator minLengthValidator = new MinLengthValidator(minLength);
         passwordValidatorManager.register(minLengthValidator);
 
-        ValidationResult actual = passwordValidatorManager.validate(password.value());
+        ValidationResult actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, maxLength={1}, expected={2}")
     @MethodSource(value = "MaxLengthValidatorData")
     @DisplayName("Should Not Be Greater Than Max Length")
-    public void maximumLengthValidation(Password password, int maxLength, ValidationResult expected) {
+    public void maximumLengthValidation(String password, int maxLength, boolean expected) {
         PasswordValidator maxLengthValidator = new MaxLengthValidator(maxLength);
         passwordValidatorManager.register(maxLengthValidator);
 
-        ValidationResult actual = passwordValidatorManager.validate(password.value());
+        ValidationResult actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] MinLength={0}, MaxLength={1}")
@@ -66,21 +66,21 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @ParameterizedTest(name = "[{index}] password={0}, digitCount={1}, expected={2}")
     @DisplayName("Should Contain Digits")
     @MethodSource(value = "DigitValidationData")
-    public void checkForDigits(Password password, int digitCount, ValidationResult expected) {
+    public void checkForDigits(String password, int digitCount, boolean expected) {
         DigitValidator digitValidator = new DigitValidator(digitCount);
         passwordValidatorManager.register(digitValidator);
 
-        var actual = passwordValidatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, minLength={1}, maxLength={2}, digitCount={3}, expected={4}")
     @DisplayName("Should Validate Digits, Min And MaxLength")
     @MethodSource(value = "DigitMinAndMaxLengthValidationData")
     public void validateDigitMinAndMaxLength(
-            Password password, int minLength, int maxLength,
-            int digitCount, ValidationResult expected
+            String password, int minLength, int maxLength,
+            int digitCount, boolean expected
     ) {
         var digitValidator = new DigitValidator(digitCount);
         var minLengthValidator = new MinLengthValidator(minLength);
@@ -88,50 +88,50 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
 
         passwordValidatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
 
-        var actual = passwordValidatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, numSpecialChars={1}, expected={2}")
     @DisplayName("Should Contain Special Characters")
     @MethodSource(value = "SpecialCharacterValidationData")
     public void checkForSpecialCharacters(
-            Password password, int numSpecialChars, ValidationResult expected
+            String password, int numSpecialChars, boolean expected
     ) {
         var specialCharacterValidator = new SpecialCharacterValidator(numSpecialChars);
         passwordValidatorManager.register(specialCharacterValidator);
 
-        var actual = passwordValidatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, upperCaseCount={1}, expected={2}")
     @DisplayName("Should Contain Uppercase letters")
     @MethodSource(value = "UpperCaseValidationData")
     public void checkForUpperCaseCharacters(
-            Password password, int upperCaseCount, ValidationResult expected
+            String password, int upperCaseCount, boolean expected
     ) {
         var upperCaseValidator = new UpperCaseValidator(upperCaseCount);
         passwordValidatorManager.register(upperCaseValidator);
 
-        var actual = passwordValidatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, lowerCaseCount={1}, expected={2}")
     @DisplayName("Should Contain Lowercase letters")
     @MethodSource(value = "LowerCaseValidationData")
     public void checkForLowerCaseCharacters(
-            Password password, int lowerCaseCount, ValidationResult expected
+            String password, int lowerCaseCount, boolean expected
     ) {
         var lowerCaseValidator = new LowerCaseValidator(lowerCaseCount);
         passwordValidatorManager.register(lowerCaseValidator);
 
-        var actual = passwordValidatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password);
 
-        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+        assertThat(actual.isValid()).isEqualTo(expected);
     }
 }
