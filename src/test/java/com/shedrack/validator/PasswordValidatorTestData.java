@@ -5,7 +5,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import java.util.stream.Stream;
 
 abstract class PasswordValidatorTestData {
-    static Stream<Arguments> MinLengthValidatorData() {
+
+    protected static Stream<Arguments> MinLengthValidatorData() {
+
+        // password, minLength, expected
         return Stream.of(
                 Arguments.of("a", 3, false),
                 Arguments.of("abc", 3, true),
@@ -14,7 +17,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> MaxLengthValidatorData() {
+    protected static Stream<Arguments> MaxLengthValidatorData() {
+
+        // password, maxLength, expected
         return Stream.of(
                 Arguments.of("password", 15, true),
                 Arguments.of("superMario", 8, false),
@@ -23,7 +28,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> ConflictValidationData() {
+    protected static Stream<Arguments> ConflictValidationData() {
+
+        // minLength, maxLength
         return Stream.of(
                 Arguments.of(16, 8),
                 Arguments.of(5, 3),
@@ -34,7 +41,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> DigitValidationData() {
+    protected static Stream<Arguments> DigitValidationData() {
+
+        // password, numberOfDigits, expected
         return Stream.of(
                 Arguments.of("abc", 1, false),
                 Arguments.of("abc3", 1, true),
@@ -43,7 +52,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> DigitMinAndMaxLengthValidationData() {
+    protected static Stream<Arguments> DigitMinAndMaxLengthValidationData() {
+
+        // password, minLength, maxLength, numberOfDigits, expected
         return Stream.of(
                 Arguments.of("abc", 4, 6, 1, false),
                 Arguments.of("a1bcpa0ss", 4, 6, 1, false),
@@ -54,7 +65,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> SpecialCharacterValidationData() {
+    protected static Stream<Arguments> SpecialCharacterValidationData() {
+
+        // password, numberOfSpecialCharacters, expected
         return Stream.of(
                 Arguments.of("ablac", 1, false),
                 Arguments.of("$a1bcpa0ss", 2, false),
@@ -62,7 +75,9 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> UpperCaseValidationData() {
+    protected static Stream<Arguments> UpperCaseValidationData() {
+
+        // password, numberOfUpperCase, expected
         return Stream.of(
                 Arguments.of("ablac", 1, false),
                 Arguments.of("$a1bCpa0ss", 1, true),
@@ -72,13 +87,28 @@ abstract class PasswordValidatorTestData {
         );
     }
 
-    static Stream<Arguments> LowerCaseValidationData() {
+    protected static Stream<Arguments> LowerCaseValidationData() {
+
+        // password, numberOfLowerCase, expected
         return Stream.of(
                 Arguments.of("aBL3@", 1, true),
                 Arguments.of("AJAH", 1, false),
                 Arguments.of("BLESSdMAef-lDn", 5, true),
                 Arguments.of("Ma1tCNNT", 5, false),
                 Arguments.of("Ma1bCPsT", 2, true)
+        );
+    }
+
+    protected static Stream<Arguments> ComplexValidationData() {
+
+        // password, minLength, maxLength, specialChars, lowerCase, upperCase, digits, expected
+        return Stream.of(
+                Arguments.of("dI$", 5, 6, 1, 3, 1, 1, false),
+                Arguments.of("0amdI$", 3, 6, 1, 3, 1, 1, true),
+                Arguments.of("0amdI$B", 3, 7, 1, 3, 2, 1, true),
+                Arguments.of("0am3I$", 3, 6, 1, 3, 1, 1, false),
+                Arguments.of("0mdI$", 3, 8, 1, 3, 1, 1, false),
+                Arguments.of("02mdI$B", 3, 7, 1, 3, 2, 1, false)
         );
     }
 }

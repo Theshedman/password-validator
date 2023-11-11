@@ -11,16 +11,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOf
 
 
 public class PasswordValidatorTest extends PasswordValidatorTestData {
+
     private ValidatorManager passwordValidatorManager;
 
     @BeforeEach
     void setup() {
+
         passwordValidatorManager = new PasswordValidatorManager();
     }
 
     @Test
     @DisplayName("Should Return Validator Value")
     public void getValidatorValue() {
+
         PasswordValidator validator = new MinLengthValidator(6);
         var expectedValue = 6;
 
@@ -31,6 +34,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @MethodSource(value = "MinLengthValidatorData")
     @DisplayName("Should Not Be Less Than Min Length")
     public void minimumLengthValidation(String password, int minLength, boolean expected) {
+
         PasswordValidator minLengthValidator = new MinLengthValidator(minLength);
         passwordValidatorManager.register(minLengthValidator);
 
@@ -43,6 +47,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @MethodSource(value = "MaxLengthValidatorData")
     @DisplayName("Should Not Be Greater Than Max Length")
     public void maximumLengthValidation(String password, int maxLength, boolean expected) {
+
         PasswordValidator maxLengthValidator = new MaxLengthValidator(maxLength);
         passwordValidatorManager.register(maxLengthValidator);
 
@@ -55,11 +60,14 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @DisplayName("Should Not Conflict With Another Validator")
     @MethodSource(value = "ConflictValidationData")
     public void checkForConflict(int min, int max) {
+
         var minValidator = new MinLengthValidator(min);
         var maxValidator = new MaxLengthValidator(max);
 
         assertThatExceptionOfType(PasswordValidationConflictException.class)
-                .isThrownBy(() -> passwordValidatorManager.register(minValidator, maxValidator));
+                .isThrownBy(() -> passwordValidatorManager
+                        .register(minValidator, maxValidator)
+                );
 
     }
 
@@ -67,6 +75,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @DisplayName("Should Contain Digits")
     @MethodSource(value = "DigitValidationData")
     public void checkForDigits(String password, int digitCount, boolean expected) {
+
         DigitValidator digitValidator = new DigitValidator(digitCount);
         passwordValidatorManager.register(digitValidator);
 
@@ -79,14 +88,16 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     @DisplayName("Should Validate Digits, Min And MaxLength")
     @MethodSource(value = "DigitMinAndMaxLengthValidationData")
     public void validateDigitMinAndMaxLength(
-            String password, int minLength, int maxLength,
-            int digitCount, boolean expected
+            String password, int minLength,
+            int maxLength, int digitCount, boolean expected
     ) {
+
         var digitValidator = new DigitValidator(digitCount);
         var minLengthValidator = new MinLengthValidator(minLength);
         var maxLengthValidator = new MaxLengthValidator(maxLength);
 
-        passwordValidatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
+        passwordValidatorManager
+                .register(digitValidator, minLengthValidator, maxLengthValidator);
 
         var actual = passwordValidatorManager.validate(password);
 
@@ -99,6 +110,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     public void checkForSpecialCharacters(
             String password, int numSpecialChars, boolean expected
     ) {
+
         var specialCharacterValidator = new SpecialCharacterValidator(numSpecialChars);
         passwordValidatorManager.register(specialCharacterValidator);
 
@@ -113,6 +125,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     public void checkForUpperCaseCharacters(
             String password, int upperCaseCount, boolean expected
     ) {
+
         var upperCaseValidator = new UpperCaseValidator(upperCaseCount);
         passwordValidatorManager.register(upperCaseValidator);
 
@@ -127,8 +140,40 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
     public void checkForLowerCaseCharacters(
             String password, int lowerCaseCount, boolean expected
     ) {
+
         var lowerCaseValidator = new LowerCaseValidator(lowerCaseCount);
         passwordValidatorManager.register(lowerCaseValidator);
+
+        var actual = passwordValidatorManager.validate(password);
+
+        assertThat(actual.isValid()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest(
+            name = "[{index}] password={0}, minLength={1}, " +
+                    "maxLength={2}, numOfSpecialChars={3}, numOfLowerCase={4}, " +
+                    "numOfUpperCase={5}, numOfDigit={6}, expected={7}"
+    )
+    @DisplayName("Should Validate Complex Password")
+    @MethodSource(value = "ComplexValidationData")
+    public void checkFor_LowerCase_UpperCase_Digits_SpecialCharacters_MinLength_and_MaxLength(
+            String password, int minLength, int maxLength,
+            int numOfSpecialChars, int numOfLowerCase,
+            int numOfUpperCase, int numOfDigit, boolean expected
+    ) {
+
+        var digitValidator = new DigitValidator(numOfDigit);
+        var minLengthValidator = new MinLengthValidator(minLength);
+        var maxLengthValidator = new MaxLengthValidator(maxLength);
+        var upperCaseValidator = new UpperCaseValidator(numOfUpperCase);
+        var lowerCaseValidator = new LowerCaseValidator(numOfLowerCase);
+        var specialCharsValidator = new SpecialCharacterValidator(numOfSpecialChars);
+
+        passwordValidatorManager.register(
+                minLengthValidator, maxLengthValidator,
+                upperCaseValidator, lowerCaseValidator,
+                specialCharsValidator, digitValidator
+        );
 
         var actual = passwordValidatorManager.validate(password);
 

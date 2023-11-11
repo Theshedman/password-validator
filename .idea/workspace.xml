@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction.">
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Delete Password record from validator package as it's no longer in use.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
@@ -47,6 +47,7 @@
     "JUnit.PasswordValidatorTest.executor": "Run",
     "JUnit.PasswordValidatorTest.getValidatorValue.executor": "Run",
     "JUnit.PasswordValidatorTest.minimumLength.executor": "Run",
+    "JUnit.validator in password-validator.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -70,7 +71,7 @@
       <recent name="com.shedrack.validator.PasswordValidatorTestData" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PasswordValidatorTest">
+  <component name="RunManager" selected="JUnit.validator in password-validator">
     <configuration name="PasswordValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="password-validator" />
       <extension name="coverage">
@@ -118,8 +119,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="validator in password-validator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="password-validator" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/com/shedrack/validator" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.validator in password-validator" />
         <item itemvalue="JUnit.PasswordValidatorTest" />
         <item itemvalue="JUnit.PasswordValidatorTest.getValidatorValue" />
         <item itemvalue="JUnit.PasswordValidatorTest.minimumLength" />
@@ -142,7 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="35030000" />
+      <workItem from="1699661718801" duration="38713000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -216,7 +226,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699740296200</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Reduce complexity of test data in PasswordValidatorTestData and PasswordValidatorTest&#10;&#10;The commit simplifies both the structure of the test data and the test cases themselves in PasswordValidatorTestData and PasswordValidatorTest. It replaces complex object creation with primitive arguments in the test data, enhancing readability. Furthermore, test cases in PasswordValidatorTest have been streamlined by directly using boolean results in assertions.">
+      <option name="closed" value="true" />
+      <created>1699743036582</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1699743036582</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Delete Password record from validator package as it's no longer in use.">
+      <option name="closed" value="true" />
+      <created>1699744833619</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1699744833619</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +265,13 @@
     <MESSAGE value="Add LowerCaseValidator and corresponding tests&#10;&#10;Added a new LowerCaseValidator class to validate the minimum number of lowercase letters in passwords. Updated the PasswordValidatorTest to include tests for this new validator. Made minor adjustments to the UpperCaseValidator test methodology for consistency." />
     <MESSAGE value="Refactor validators and improve error messaging&#10;&#10;Updated validators for clarity and improved their error messages. Minor naming changes have also been made to improve readability and understanding of the code. PasswordValidatorTest has been updated as a part of these changes." />
     <MESSAGE value="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction." />
-    <option name="LAST_COMMIT_MESSAGE" value="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction." />
+    <MESSAGE value="Simplify validation test data and arguments in PasswordValidatorTestData &#10;&#10;The refinement entails the streamlining of validation test data for the PasswordValidator by replacing complex object construction with direct primitive arguments for clarity. PasswordValidatorTest has been pared down to use boolean results directly in assertions, as opposed to complex ValidationResult objects." />
+    <MESSAGE value="Reduce complexity of test data in PasswordValidatorTestData and PasswordValidatorTest&#10;&#10;The commit simplifies both the structure of the test data and the test cases themselves in PasswordValidatorTestData and PasswordValidatorTest. It replaces complex object creation with primitive arguments in the test data, enhancing readability. Furthermore, test cases in PasswordValidatorTest have been streamlined by directly using boolean results in assertions." />
+    <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record from the validator package has been deleted. This change reflects efforts to simplify the code structure and reduce complexity. Specifically, it enhances the readability and understandability of the code." />
+    <MESSAGE value="Delete Password.java from validator package&#10;&#10;Password.java file has been removed to simplify the validator package. This is in line with efforts to enhance the codebase readability and maintainability." />
+    <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record that previously existed in the validator package has been deleted. This change was implemented in order to simplify the validator package and improve the overall readability and maintainability of the codebase." />
+    <MESSAGE value="Remove Password.java file&#10;&#10;The Password.java file was removed, thus eliminating the Password record from the validator package. This is a measure taken to make the codebase more straightforward to comprehend and manage, improving code clarity." />
+    <MESSAGE value="Delete Password record from validator package as it's no longer in use." />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete Password record from validator package as it's no longer in use." />
   </component>
 </project>
