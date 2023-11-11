@@ -122,6 +122,23 @@ public class PasswordValidatorTest {
         );
     }
 
+    public static Stream<Arguments> SpecialCharacterValidationData() {
+        return Stream.of(
+                Arguments.of(
+                        new Password("ablac"), 1,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("$a1bcpa0ss"), 2,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("apa#0ss%"), 2,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                )
+        );
+    }
+
     @BeforeEach
     void setup() {
         passwordValidatorManager = new PasswordValidatorManager();
@@ -204,6 +221,23 @@ public class PasswordValidatorTest {
         var maxLengthValidator = new MaxLengthValidator(maxLength);
 
         validatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
+
+        var actual = validatorManager.validate(password.value());
+
+        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+    }
+
+    @ParameterizedTest(name = "[{index}] password={0}, numSpecialChars={1}, expected={2}")
+    @DisplayName("Should Contain Special Characters")
+    @MethodSource(value = "SpecialCharacterValidationData")
+    public void checkForSpecialCharacters(
+            Password password, int numSpecialChars, ValidationResult expected
+    ) {
+        var validatorManager = new PasswordValidatorManager();
+
+        var specialCharacterValidator = new SpecialCharacterValidator(numSpecialChars);
+
+        validatorManager.register(specialCharacterValidator);
 
         var actual = validatorManager.validate(password.value());
 

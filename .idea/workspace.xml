@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidationResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidationResult.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidatorManager.java" afterDir="false" />
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +136,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="25654000" />
+      <workItem from="1699661718801" duration="27170000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -154,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699719313316</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes.">
+      <option name="closed" value="true" />
+      <created>1699731471426</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1699731471426</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +162,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration." />
+    <MESSAGE value="Refactor password validation and update tests&#10;&#10;Enhanced password validators to account for the new digit requirement and updated ValidationResult to address this new feature. Added a new DigitValidator class to handle digit requirement in passwords. All changes are covered with updated and added tests." />
+    <MESSAGE value="Refactor password validators and enhance testing &#10;&#10;Updated the password validation process to include digit requirements, introduced via the new DigitValidator class. Also incorporated changes to ValidationResult and updated the tests" />
+    <MESSAGE value="Refactor password validators and enhance tests&#10;&#10;Enhanced password validation by adding a requirement for digits through the implementation of a new class, DigitValidator. Also modified the ValidationResult to accommodate these changes and updated the associated tests to ensure these new requirements are covered." />
+    <MESSAGE value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
   </component>
 </project>
