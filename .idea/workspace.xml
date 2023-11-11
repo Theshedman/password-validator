@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" afterDir="false" />
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add SpecialCharacterValidator with relevant tests&#10;&#10;Implemented a SpecialCharacterValidator to check the minimum number of special characters in passwords. Updated the PasswordValidatorTest to provide test data and verify the functionality of special character validation.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -13,6 +13,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExportTestResults" outputFolder="$PROJECT_DIR$" openResultsInEditor="true" userTempatePath="" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -42,7 +43,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "JUnit.PasswordValidatorTest.executor": "Run",
+    "JUnit.PasswordValidatorTest.executor": "Coverage",
     "JUnit.PasswordValidatorTest.getValidatorValue.executor": "Run",
     "JUnit.PasswordValidatorTest.minimumLength.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
@@ -64,7 +65,7 @@
       <recent name="com.shedrack.validator" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PasswordValidatorTest.getValidatorValue">
+  <component name="RunManager" selected="JUnit.PasswordValidatorTest">
     <configuration name="PasswordValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="password-validator" />
       <extension name="coverage">
@@ -136,7 +137,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="27170000" />
+      <workItem from="1699661718801" duration="29070000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -154,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699731471426</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add SpecialCharacterValidator with relevant tests&#10;&#10;Implemented a SpecialCharacterValidator to check the minimum number of special characters in passwords. Updated the PasswordValidatorTest to provide test data and verify the functionality of special character validation.">
+      <option name="closed" value="true" />
+      <created>1699733953481</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1699733953481</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +175,7 @@
     <MESSAGE value="Refactor password validators and enhance testing &#10;&#10;Updated the password validation process to include digit requirements, introduced via the new DigitValidator class. Also incorporated changes to ValidationResult and updated the tests" />
     <MESSAGE value="Refactor password validators and enhance tests&#10;&#10;Enhanced password validation by adding a requirement for digits through the implementation of a new class, DigitValidator. Also modified the ValidationResult to accommodate these changes and updated the associated tests to ensure these new requirements are covered." />
     <MESSAGE value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
+    <MESSAGE value="Add SpecialCharacterValidator with relevant tests&#10;&#10;Implemented a SpecialCharacterValidator to check the minimum number of special characters in passwords. Updated the PasswordValidatorTest to provide test data and verify the functionality of special character validation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add SpecialCharacterValidator with relevant tests&#10;&#10;Implemented a SpecialCharacterValidator to check the minimum number of special characters in passwords. Updated the PasswordValidatorTest to provide test data and verify the functionality of special character validation." />
   </component>
 </project>

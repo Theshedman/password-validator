@@ -183,13 +183,11 @@ public class PasswordValidatorTest {
     @DisplayName("Should Not Conflict With Another Validator")
     @MethodSource(value = "ConflictValidationData")
     public void checkForConflict(int min, int max) {
-        var validatorManager = new PasswordValidatorManager();
-
         var minValidator = new MinLengthValidator(min);
         var maxValidator = new MaxLengthValidator(max);
 
         assertThatExceptionOfType(PasswordValidationConflictException.class)
-                .isThrownBy(() -> validatorManager.register(minValidator, maxValidator));
+                .isThrownBy(() -> passwordValidatorManager.register(minValidator, maxValidator));
 
     }
 
@@ -197,12 +195,10 @@ public class PasswordValidatorTest {
     @DisplayName("Should Contain Digits")
     @MethodSource(value = "DigitValidationData")
     public void checkForDigits(Password password, int digitCount, ValidationResult expected) {
-        var validatorManager = new PasswordValidatorManager();
-
         DigitValidator digitValidator = new DigitValidator(digitCount);
-        validatorManager.register(digitValidator);
+        passwordValidatorManager.register(digitValidator);
 
-        var actual = validatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password.value());
 
         assertThat(actual.isValid()).isEqualTo(expected.isValid());
     }
@@ -214,15 +210,13 @@ public class PasswordValidatorTest {
             Password password, int minLength, int maxLength,
             int digitCount, ValidationResult expected
     ) {
-        var validatorManager = new PasswordValidatorManager();
-
         var digitValidator = new DigitValidator(digitCount);
         var minLengthValidator = new MinLengthValidator(minLength);
         var maxLengthValidator = new MaxLengthValidator(maxLength);
 
-        validatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
+        passwordValidatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
 
-        var actual = validatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password.value());
 
         assertThat(actual.isValid()).isEqualTo(expected.isValid());
     }
@@ -233,13 +227,10 @@ public class PasswordValidatorTest {
     public void checkForSpecialCharacters(
             Password password, int numSpecialChars, ValidationResult expected
     ) {
-        var validatorManager = new PasswordValidatorManager();
-
         var specialCharacterValidator = new SpecialCharacterValidator(numSpecialChars);
+        passwordValidatorManager.register(specialCharacterValidator);
 
-        validatorManager.register(specialCharacterValidator);
-
-        var actual = validatorManager.validate(password.value());
+        var actual = passwordValidatorManager.validate(password.value());
 
         assertThat(actual.isValid()).isEqualTo(expected.isValid());
     }
