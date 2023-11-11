@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PasswordValidatorManager implements ValidatorManager {
+
     private final List<PasswordValidator> registeredValidators = new ArrayList<>();
 
     @Override
@@ -13,9 +14,11 @@ public class PasswordValidatorManager implements ValidatorManager {
         for (var newValidator : newValidators) {
 
             for (var registeredValidator : registeredValidators) {
+
                 var conflictsMsg = newValidator.conflictsWith(registeredValidator);
 
                 if (conflictsMsg.isPresent()) {
+
                     throw new PasswordValidationConflictException(conflictsMsg.get());
                 }
             }
@@ -26,6 +29,25 @@ public class PasswordValidatorManager implements ValidatorManager {
 
     public ValidationResult validate(String password) {
 
-        return registeredValidators.getFirst().validate(password);
+        boolean isValid;
+        int invalidCounter = 0;
+
+        List<String> validationMessage = new ArrayList<>();
+
+        for (var validator : registeredValidators) {
+
+            ValidationResult result = validator.validate(password);
+
+            if (!result.isValid()) {
+
+                invalidCounter++;
+
+                validationMessage.addAll(result.message());
+            }
+        }
+
+        isValid = invalidCounter > 0 ? Boolean.FALSE : Boolean.TRUE;
+
+        return new ValidationResult(isValid, validationMessage);
     }
 }

@@ -6,5 +6,8 @@ public interface PasswordValidator extends Validator {
 
     int value();
 
-    Optional<String> conflictsWith(PasswordValidator validator);
+    default Optional<String> conflictsWith(PasswordValidator validator) {
+
+        return Optional.empty();
+    }
 }

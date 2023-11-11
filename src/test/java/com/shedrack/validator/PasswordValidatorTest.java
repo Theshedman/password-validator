@@ -7,6 +7,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,19 +21,19 @@ public class PasswordValidatorTest {
         return Stream.of(
                 Arguments.of(
                         new Password("a"), 3,
-                        new ValidationResult(false, "length must be minimum of 3 characters")
+                        new ValidationResult(false, List.of("length must not be less than 3 characters"))
                 ),
                 Arguments.of(
                         new Password("abc"), 3,
-                        new ValidationResult(true, null)
+                        new ValidationResult(true, List.of())
                 ),
                 Arguments.of(
                         new Password("love"), 4,
-                        new ValidationResult(true, null)
+                        new ValidationResult(true, List.of())
                 ),
                 Arguments.arguments(
                         new Password("pa"), 5,
-                        new ValidationResult(false, "length must be minimum of 5 characters")
+                        new ValidationResult(false, List.of("length must not be less than 5 characters"))
 
                 )
         );
@@ -42,19 +43,19 @@ public class PasswordValidatorTest {
         return Stream.of(
                 Arguments.of(
                         new Password("password"), 15,
-                        new ValidationResult(true, null)
+                        new ValidationResult(true, List.of())
                 ),
                 Arguments.of(
                         new Password("superMario"), 8,
-                        new ValidationResult(false, "length must be maximum of 8 characters")
+                        new ValidationResult(false, List.of("length must not be greater than 8 characters"))
                 ),
                 Arguments.of(
                         new Password("designer_dau"), 6,
-                        new ValidationResult(false, "length must be maximum of 6 characters")
+                        new ValidationResult(false, List.of("length must not be greater than 6 characters"))
                 ),
                 Arguments.arguments(
                         new Password("seurityMax"), 12,
-                        new ValidationResult(true, null)
+                        new ValidationResult(true, List.of())
 
                 )
         );
@@ -68,6 +69,56 @@ public class PasswordValidatorTest {
                 Arguments.of(4, 3),
                 Arguments.of(5, 4),
                 Arguments.of(8, 7)
+        );
+    }
+
+    public static Stream<Arguments> DigitValidationData() {
+        return Stream.of(
+                Arguments.of(
+                        new Password("abc"), 1,
+                        new ValidationResult(Boolean.FALSE, List.of("must contain at least 1 digit(s)"))
+                ),
+                Arguments.of(
+                        new Password("abc3"), 1,
+                        new ValidationResult(Boolean.TRUE, null)
+                ),
+                Arguments.of(
+                        new Password("a2b14"), 2,
+                        new ValidationResult(Boolean.TRUE, null)
+                ),
+                Arguments.of(
+                        new Password("90adt1abc"), 4,
+                        new ValidationResult(Boolean.FALSE, List.of("must contain at least 4 digit(s)"))
+                )
+        );
+    }
+
+    public static Stream<Arguments> DigitMinAndMaxLengthValidationData() {
+        return Stream.of(
+                Arguments.of(
+                        new Password("abc"), 4, 6, 1,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("a1bcpa0ss"), 4, 6, 1,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("apa0ss"), 4, 6, 1,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("ab3lsk63cup1"), 2, 16, 4,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("1b9"), 3, 5, 2,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("1bath"), 3, 5, 2,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                )
         );
     }
 
@@ -85,7 +136,7 @@ public class PasswordValidatorTest {
         assertThat(validator.value()).isEqualTo(expectedValue);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] password={0}, minLength={1}, expected={2}")
     @MethodSource(value = "MinLengthValidatorData")
     @DisplayName("Should Not Be Less Than Min Length")
     public void minimumLengthValidation(Password password, int minLength, ValidationResult expected) {
@@ -98,7 +149,7 @@ public class PasswordValidatorTest {
         assertThat(actual.message()).isEqualTo(expected.message());
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] password={0}, maxLength={1}, expected={2}")
     @MethodSource(value = "MaxLengthValidatorData")
     @DisplayName("Should Not Be Greater Than Max Length")
     public void maximumLengthValidation(Password password, int maxLength, ValidationResult expected) {
@@ -111,7 +162,7 @@ public class PasswordValidatorTest {
         assertThat(actual.message()).isEqualTo(expected.message());
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "[{index}] MinLength={0}, MaxLength={1}")
     @DisplayName("Should Not Conflict With Another Validator")
     @MethodSource(value = "ConflictValidationData")
     public void checkForConflict(int min, int max) {
@@ -123,5 +174,39 @@ public class PasswordValidatorTest {
         assertThatExceptionOfType(PasswordValidationConflictException.class)
                 .isThrownBy(() -> validatorManager.register(minValidator, maxValidator));
 
+    }
+
+    @ParameterizedTest(name = "[{index}] password={0}, digitCount={1}, expected={2}")
+    @DisplayName("Should Contain Digits")
+    @MethodSource(value = "DigitValidationData")
+    public void checkForDigits(Password password, int digitCount, ValidationResult expected) {
+        var validatorManager = new PasswordValidatorManager();
+
+        DigitValidator digitValidator = new DigitValidator(digitCount);
+        validatorManager.register(digitValidator);
+
+        var actual = validatorManager.validate(password.value());
+
+        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+    }
+
+    @ParameterizedTest(name = "[{index}] password={0}, minLength={1}, maxLength={2}, digitCount={3}, expected={4}")
+    @DisplayName("Should Validate Digits, Min And MaxLength")
+    @MethodSource(value = "DigitMinAndMaxLengthValidationData")
+    public void validateDigitMinAndMaxLength(
+            Password password, int minLength, int maxLength,
+            int digitCount, ValidationResult expected
+    ) {
+        var validatorManager = new PasswordValidatorManager();
+
+        var digitValidator = new DigitValidator(digitCount);
+        var minLengthValidator = new MinLengthValidator(minLength);
+        var maxLengthValidator = new MaxLengthValidator(maxLength);
+
+        validatorManager.register(digitValidator, minLengthValidator, maxLengthValidator);
+
+        var actual = validatorManager.validate(password.value());
+
+        assertThat(actual.isValid()).isEqualTo(expected.isValid());
     }
 }

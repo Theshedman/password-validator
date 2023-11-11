@@ -1,4 +1,6 @@
 package com.shedrack.validator;
 
-public record ValidationResult(boolean isValid, String message) {
+import java.util.List;
+
+public record ValidationResult(boolean isValid, List<String> message) {
 }
