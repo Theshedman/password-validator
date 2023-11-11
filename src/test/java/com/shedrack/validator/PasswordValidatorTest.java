@@ -139,6 +139,31 @@ public class PasswordValidatorTest {
         );
     }
 
+    public static Stream<Arguments> UpperCaseValidationData() {
+        return Stream.of(
+                Arguments.of(
+                        new Password("ablac"), 1,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("$a1bCpa0ss"), 1,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("Ma1bCpA0SsT"), 5,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("Ma1bCpsT"), 5,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("Ma1bCpsT"), 2,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                )
+        );
+    }
+
     @BeforeEach
     void setup() {
         passwordValidatorManager = new PasswordValidatorManager();
@@ -229,6 +254,20 @@ public class PasswordValidatorTest {
     ) {
         var specialCharacterValidator = new SpecialCharacterValidator(numSpecialChars);
         passwordValidatorManager.register(specialCharacterValidator);
+
+        var actual = passwordValidatorManager.validate(password.value());
+
+        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+    }
+
+    @ParameterizedTest(name = "[{index}] password={0}, upperCaseCount={1}, expected={2}")
+    @DisplayName("Should Contain Uppercase Characters")
+    @MethodSource(value = "UpperCaseValidationData")
+    public void checkForUppercaseCharacters(
+            Password password, int upperCaseCount, ValidationResult expected
+    ) {
+        var upperCaseValidator = new UpperCaseValidator(upperCaseCount);
+        passwordValidatorManager.register(upperCaseValidator);
 
         var actual = passwordValidatorManager.validate(password.value());
 
