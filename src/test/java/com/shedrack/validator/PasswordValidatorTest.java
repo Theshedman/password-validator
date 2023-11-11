@@ -164,6 +164,31 @@ public class PasswordValidatorTest {
         );
     }
 
+    public static Stream<Arguments> LowerCaseValidationData() {
+        return Stream.of(
+                Arguments.of(
+                        new Password("aBL3@"), 1,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("AJAH"), 1,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("BLESSdMAef-lDn"), 5,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                ),
+                Arguments.of(
+                        new Password("Ma1tCNNT"), 5,
+                        new ValidationResult(Boolean.FALSE, List.of())
+                ),
+                Arguments.of(
+                        new Password("Ma1bCPsT"), 2,
+                        new ValidationResult(Boolean.TRUE, List.of())
+                )
+        );
+    }
+
     @BeforeEach
     void setup() {
         passwordValidatorManager = new PasswordValidatorManager();
@@ -261,13 +286,27 @@ public class PasswordValidatorTest {
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, upperCaseCount={1}, expected={2}")
-    @DisplayName("Should Contain Uppercase Characters")
+    @DisplayName("Should Contain Uppercase letters")
     @MethodSource(value = "UpperCaseValidationData")
-    public void checkForUppercaseCharacters(
+    public void checkForUpperCaseCharacters(
             Password password, int upperCaseCount, ValidationResult expected
     ) {
         var upperCaseValidator = new UpperCaseValidator(upperCaseCount);
         passwordValidatorManager.register(upperCaseValidator);
+
+        var actual = passwordValidatorManager.validate(password.value());
+
+        assertThat(actual.isValid()).isEqualTo(expected.isValid());
+    }
+
+    @ParameterizedTest(name = "[{index}] password={0}, lowerCaseCount={1}, expected={2}")
+    @DisplayName("Should Contain Lowercase letters")
+    @MethodSource(value = "LowerCaseValidationData")
+    public void checkForLowerCaseCharacters(
+            Password password, int lowerCaseCount, ValidationResult expected
+    ) {
+        var lowerCaseValidator = new LowerCaseValidator(lowerCaseCount);
+        passwordValidatorManager.register(lowerCaseValidator);
 
         var actual = passwordValidatorManager.validate(password.value());
 
