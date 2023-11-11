@@ -4,31 +4,29 @@ import java.util.List;
 
 public class SpecialCharacterValidator implements PasswordValidator {
 
-    private final int numSpecialChars;
+    private final int minSpecialChars;
 
-    public SpecialCharacterValidator(int numSpecialChars) {
-        this.numSpecialChars = numSpecialChars;
+    public SpecialCharacterValidator(int minSpecialChars) {
+        this.minSpecialChars = minSpecialChars;
     }
 
     @Override
     public int value() {
-        return numSpecialChars;
+        return minSpecialChars;
     }
 
     @Override
     public ValidationResult validate(String password) {
 
-        long specialCharacterCount = countSpecialCharactersIn(password);
+        if (numberOfSpecialCharactersIn(password) < minSpecialChars) {
 
-        if (specialCharacterCount < numSpecialChars) {
-
-            return new ValidationResult(false, List.of("must contain at least " + numSpecialChars + " special character(s)"));
+            return new ValidationResult(false, List.of("must contain at least " + minSpecialChars + " special character(s)"));
         }
 
         return new ValidationResult(true, List.of());
     }
 
-    private static long countSpecialCharactersIn(String password) {
+    private static long numberOfSpecialCharactersIn(String password) {
 
         return password
                 .chars()

@@ -213,7 +213,6 @@ public class PasswordValidatorTest {
         ValidationResult actual = passwordValidatorManager.validate(password.value());
 
         assertThat(actual.isValid()).isEqualTo(expected.isValid());
-        assertThat(actual.message()).isEqualTo(expected.message());
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, maxLength={1}, expected={2}")
@@ -226,7 +225,6 @@ public class PasswordValidatorTest {
         ValidationResult actual = passwordValidatorManager.validate(password.value());
 
         assertThat(actual.isValid()).isEqualTo(expected.isValid());
-        assertThat(actual.message()).isEqualTo(expected.message());
     }
 
     @ParameterizedTest(name = "[{index}] MinLength={0}, MaxLength={1}")

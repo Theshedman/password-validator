@@ -19,7 +19,7 @@ public class MaxLengthValidator implements PasswordValidator {
 
         if (passwordLength > maxLength) {
 
-            var message = "length must not be greater than " + maxLength + " characters";
+            var message = "length cannot exceed required " + maxLength + " maximum characters.";
 
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
@@ -34,7 +34,7 @@ public class MaxLengthValidator implements PasswordValidator {
 
             if (this.value() < minLengthValidator.value()){
 
-                return Optional.of("Maximum length cannot be less than minimum length.");
+                return Optional.of("Invalid: Max length less than Min length.");
             }
         }
 
