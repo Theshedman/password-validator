@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Remove junit jupiter api dependency from pom.xml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,6 +169,7 @@
       <workItem from="1699658779869" duration="2828000" />
       <workItem from="1699661718801" duration="52087000" />
       <workItem from="1699763141825" duration="499000" />
+      <workItem from="1699791390890" duration="594000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -285,22 +283,29 @@
       <option name="project" value="LOCAL" />
       <updated>1699759201456</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Add new Readme.md for Password Validator, update dependencies in pom.xml&#10;&#10;Added a Readme.md to provide a full overview and user instructions for Password Validator library. Updates were made to pom.xml to include new dependencies for junit-jupiter-api and surefire-junit-platform.">
+      <option name="closed" value="true" />
+      <created>1699791506851</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1699791506851</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Remove junit jupiter api dependency from pom.xml">
+      <option name="closed" value="true" />
+      <created>1699791711178</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1699791711178</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add LowerCaseValidator and modify UpperCaseValidator&#10;&#10;Introduced a new class, LowerCaseValidator, to validate the minimum number of lowercase letters in passwords. Additionally, made modifications in the UpperCaseValidator and updated PasswordValidatorTest to include tests for lowercase validation." />
-    <MESSAGE value="Add LowerCaseValidator, update tests and refactor &#10;&#10;Implemented a new class, LowerCaseValidator, to validate the minimum number of lowercase letters in passwords. Revised the PasswordValidatorTest to include corresponding tests for lowercase validation. Some minor alterations were also made in the UpperCaseValidator class." />
-    <MESSAGE value="Add LowerCaseValidator and corresponding tests&#10;&#10;Added a new LowerCaseValidator class to validate the minimum number of lowercase letters in passwords. Updated the PasswordValidatorTest to include tests for this new validator. Made minor adjustments to the UpperCaseValidator test methodology for consistency." />
-    <MESSAGE value="Refactor validators and improve error messaging&#10;&#10;Updated validators for clarity and improved their error messages. Minor naming changes have also been made to improve readability and understanding of the code. PasswordValidatorTest has been updated as a part of these changes." />
-    <MESSAGE value="Extract password validator test data into a separate class&#10;&#10;Created a new class, PasswordValidatorTestData, to house all the password validation test data that was originally in PasswordValidatorTest. This refactoring aims to improve code readability and maintainability. Removed redundant code in PasswordValidatorTest after the extraction." />
-    <MESSAGE value="Simplify validation test data and arguments in PasswordValidatorTestData &#10;&#10;The refinement entails the streamlining of validation test data for the PasswordValidator by replacing complex object construction with direct primitive arguments for clarity. PasswordValidatorTest has been pared down to use boolean results directly in assertions, as opposed to complex ValidationResult objects." />
-    <MESSAGE value="Reduce complexity of test data in PasswordValidatorTestData and PasswordValidatorTest&#10;&#10;The commit simplifies both the structure of the test data and the test cases themselves in PasswordValidatorTestData and PasswordValidatorTest. It replaces complex object creation with primitive arguments in the test data, enhancing readability. Furthermore, test cases in PasswordValidatorTest have been streamlined by directly using boolean results in assertions." />
-    <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record from the validator package has been deleted. This change reflects efforts to simplify the code structure and reduce complexity. Specifically, it enhances the readability and understandability of the code." />
-    <MESSAGE value="Delete Password.java from validator package&#10;&#10;Password.java file has been removed to simplify the validator package. This is in line with efforts to enhance the codebase readability and maintainability." />
     <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record that previously existed in the validator package has been deleted. This change was implemented in order to simplify the validator package and improve the overall readability and maintainability of the codebase." />
     <MESSAGE value="Remove Password.java file&#10;&#10;The Password.java file was removed, thus eliminating the Password record from the validator package. This is a measure taken to make the codebase more straightforward to comprehend and manage, improving code clarity." />
     <MESSAGE value="Delete Password record from validator package as it's no longer in use." />
@@ -317,6 +322,15 @@
     <MESSAGE value="Improve password validation and testing&#10;&#10;Enhanced password maximum length validation by comparing it with other validation values. Transformed PasswordValidator into an abstract class that enforces non-negative values, with each specific validator updated to extend this new class. Integrated an extra test case to tackle cases of password maximum length conflicts." />
     <MESSAGE value="Enhance password max length validation and add conflict testing&#10;&#10;Refined the password max length validation logic by including a comparison with other character type count requirements. Converted PasswordValidator into an abstract class to enforce non-negative values, requiring all specific validators to extend from this class. Added a new test case for handling situations when the password maximum length is in conflict with the sum of all character type counts." />
     <MESSAGE value="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length." />
-    <option name="LAST_COMMIT_MESSAGE" value="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length." />
+    <MESSAGE value="Add new Readme.md for Password Validator, update dependencies in pom.xml&#10;&#10;Added a Readme.md to provide a full overview and user instructions for Password Validator library. Updates were made to pom.xml to include new dependencies for junit-jupiter-api and surefire-junit-platform." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; has been removed from the pom.xml file. This change simplifies the dependencies and therefore eases the maintenance of the project. Also, this dependent package was found to be unused in the current codebase." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; has been removed from the pom.xml file. This change aims to simplify the dependencies, thereby making project maintenance easier. The package was found to be unused in the current codebase." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; has been removed from the pom.xml file. This adjustment simplifies the project dependencies and makes maintenance more straightforward. The removed package was not in use within the current codebase." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; has been removed from the pom.xml file. As the package was not in use within the code, this removal simplifies project dependencies and makes maintenance easier." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; has been removed from the pom.xml file. This change declutters the project's dependency list and promotes easier maintenance since the said package was not being utilized in the codebase." />
+    <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; was found to be unnecessary and hence, has been taken out of the pom.xml file. This step will simplify management by keeping the dependency" />
+    <MESSAGE value="list cleaner and less cluttered." />
+    <MESSAGE value="Remove junit jupiter api dependency from pom.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove junit jupiter api dependency from pom.xml" />
   </component>
 </project>

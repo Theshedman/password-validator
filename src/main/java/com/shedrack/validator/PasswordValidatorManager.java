@@ -34,8 +34,7 @@ public class PasswordValidatorManager implements ValidatorManager {
 
     public ValidationResult validate(String password) {
 
-        boolean isValid;
-        int invalidCounter = 0;
+        int invalidCount = 0;
 
         List<String> validationMessage = new ArrayList<>();
 
@@ -45,13 +44,13 @@ public class PasswordValidatorManager implements ValidatorManager {
 
             if (!result.isValid()) {
 
-                invalidCounter++;
+                invalidCount++;
 
                 validationMessage.addAll(result.message());
             }
         }
 
-        isValid = invalidCounter > 0 ? Boolean.FALSE : Boolean.TRUE;
+        var isValid = invalidCount > 0 ? Boolean.FALSE : Boolean.TRUE;
 
         return new ValidationResult(isValid, validationMessage);
     }
