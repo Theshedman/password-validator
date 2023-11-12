@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Remove junit jupiter api dependency from pom.xml" />
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Refactor PasswordValidatorManager and update workspace.xml&#10;&#10;Simplified the validate method in PasswordValidatorManager by consolidating two variable declarations into one. Local variable &quot;invalidCounter&quot; was renamed to &quot;invalidCount&quot; for improved readability. In addition, the .idea/workspace.xml file was updated: changes related to tasks and commit messages were recorded.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidatorCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +29,7 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -69,7 +82,7 @@
       <recent name="com.shedrack.validator.PasswordValidatorTestData" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.validator in password-validator">
+  <component name="RunManager" selected="JUnit.PasswordValidatorTest">
     <configuration name="PasswordValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="password-validator" />
       <extension name="coverage">
@@ -143,8 +156,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.validator in password-validator" />
         <item itemvalue="JUnit.PasswordValidatorTest" />
+        <item itemvalue="JUnit.validator in password-validator" />
         <item itemvalue="JUnit.PasswordValidatorTest.rejectNegativeValues" />
         <item itemvalue="JUnit.PasswordValidatorTest.getValidatorValue" />
         <item itemvalue="JUnit.PasswordValidatorTest.minimumLength" />
@@ -169,7 +182,8 @@
       <workItem from="1699658779869" duration="2828000" />
       <workItem from="1699661718801" duration="52087000" />
       <workItem from="1699763141825" duration="499000" />
-      <workItem from="1699791390890" duration="594000" />
+      <workItem from="1699791390890" duration="1221000" />
+      <workItem from="1699820250026" duration="5108000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -299,15 +313,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699791711178</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Refactor PasswordValidatorManager and update workspace.xml&#10;&#10;Simplified the validate method in PasswordValidatorManager by consolidating two variable declarations into one. Local variable &quot;invalidCounter&quot; was renamed to &quot;invalidCount&quot; for improved readability. In addition, the .idea/workspace.xml file was updated: changes related to tasks and commit messages were recorded.">
+      <option name="closed" value="true" />
+      <created>1699792523081</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699792523081</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record that previously existed in the validator package has been deleted. This change was implemented in order to simplify the validator package and improve the overall readability and maintainability of the codebase." />
-    <MESSAGE value="Remove Password.java file&#10;&#10;The Password.java file was removed, thus eliminating the Password record from the validator package. This is a measure taken to make the codebase more straightforward to comprehend and manage, improving code clarity." />
     <MESSAGE value="Delete Password record from validator package as it's no longer in use." />
     <MESSAGE value="The Password record was removed from the validator package to simplify the codebase and enhance readability. The removal of this record impacts the PasswordValidatorTest and the PasswordValidatorTestData, and they have been adjusted appropriately to reflect this change." />
     <MESSAGE value="Update PasswordValidator tests and data after record removal&#10;&#10;The &quot;Password&quot; record within the validator package was removed to simplify the codebase and improve readability. The corresponding test and data classes, &quot;PasswordValidatorTest&quot; and &quot;PasswordValidatorTestData&quot;, have been revised accordingly to accommodate this change. In addition, raw inputs were added to test data for clarity and the formatting of multi-parameter function calls was improved for better readability." />
@@ -331,6 +351,8 @@
     <MESSAGE value="Remove junit.jupiter dependency from pom.xml&#10;&#10;The dependency &quot;junit.jupiter&quot; was found to be unnecessary and hence, has been taken out of the pom.xml file. This step will simplify management by keeping the dependency" />
     <MESSAGE value="list cleaner and less cluttered." />
     <MESSAGE value="Remove junit jupiter api dependency from pom.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove junit jupiter api dependency from pom.xml" />
+    <MESSAGE value="Refactor PasswordValidatorManager and clean up workspace settings&#10;&#10;The commit refactors the PasswordValidatorManager to enhance readability and make the code more succinct, adjusting the invalidCounter variable to simply invalidCount and updating its use in the validation process. Changes were also made to the workspace.xml to remove unused tasks and update task summaries." />
+    <MESSAGE value="Refactor PasswordValidatorManager and update workspace.xml&#10;&#10;Simplified the validate method in PasswordValidatorManager by consolidating two variable declarations into one. Local variable &quot;invalidCounter&quot; was renamed to &quot;invalidCount&quot; for improved readability. In addition, the .idea/workspace.xml file was updated: changes related to tasks and commit messages were recorded." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor PasswordValidatorManager and update workspace.xml&#10;&#10;Simplified the validate method in PasswordValidatorManager by consolidating two variable declarations into one. Local variable &quot;invalidCounter&quot; was renamed to &quot;invalidCount&quot; for improved readability. In addition, the .idea/workspace.xml file was updated: changes related to tasks and commit messages were recorded." />
   </component>
 </project>

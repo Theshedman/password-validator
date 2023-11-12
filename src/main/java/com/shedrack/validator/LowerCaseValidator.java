@@ -4,9 +4,9 @@ import java.util.List;
 
 public class LowerCaseValidator extends PasswordValidator {
 
-    public LowerCaseValidator(int value) {
+    public LowerCaseValidator(int passwordRule) {
 
-        super(value);
+        super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
 
     }
 
@@ -21,9 +21,9 @@ public class LowerCaseValidator extends PasswordValidator {
     @Override
     public ValidationResult validate(String password) {
 
-        if (numberOfLowerCaseLettersIn(password) < value()) {
+        if (numberOfLowerCaseLettersIn(password) < passwordRule()) {
 
-            String message = "must contain at least " + value() + " lowercase letters";
+            String message = "must contain at least " + passwordRule() + " lowercase letters";
 
             return new ValidationResult(false, List.of(message));
         }

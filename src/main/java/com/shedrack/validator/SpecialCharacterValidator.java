@@ -4,17 +4,17 @@ import java.util.List;
 
 public class SpecialCharacterValidator extends PasswordValidator {
 
-    public SpecialCharacterValidator(int value) {
+    public SpecialCharacterValidator(int passwordRule) {
 
-        super(value);
+        super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
     }
 
     @Override
     public ValidationResult validate(String password) {
 
-        if (numberOfSpecialCharactersIn(password) < value()) {
+        if (numberOfSpecialCharactersIn(password) < passwordRule()) {
 
-            String message = "must contain at least " + value() + " special character(s)";
+            String message = "must contain at least " + passwordRule() + " special character(s)";
 
             return new ValidationResult(false, List.of(message));
         }

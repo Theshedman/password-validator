@@ -4,19 +4,27 @@ import java.util.Optional;
 
 public abstract class PasswordValidator implements Validator {
 
-    private final int value;
+    private final int rule;
 
-    protected PasswordValidator(int value) {
+    private final ValidatorCategory category;
 
-        assertNonNegative(value);
+    protected PasswordValidator(ValidatorCategory category, int rule) {
 
-        this.value = value;
+        assertNonNegative(rule);
+
+        this.rule = rule;
+        this.category = category;
 
     }
 
-    protected int value() {
+    protected int passwordRule() {
 
-        return value;
+        return rule;
+    }
+
+    protected ValidatorCategory category() {
+
+        return category;
     }
 
     private void assertNonNegative(int value) {

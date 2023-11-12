@@ -4,17 +4,17 @@ import java.util.List;
 
 public class DigitValidator extends PasswordValidator {
 
-    public DigitValidator(int value) {
+    public DigitValidator(int passwordRule) {
 
-        super(value);
+        super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
     }
 
     @Override
     public ValidationResult validate(String password) {
 
-        if (numberOfDigitsIn(password) < value()) {
+        if (numberOfDigitsIn(password) < passwordRule()) {
 
-            String message = "must contain at least " + value() + " digit(s)";
+            String message = "must contain at least " + passwordRule() + " digit(s)";
 
             return new ValidationResult(false, List.of(message));
         }

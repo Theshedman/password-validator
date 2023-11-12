@@ -5,11 +5,11 @@ import java.util.Optional;
 
 public class MaxLengthValidator extends PasswordValidator {
 
-    private int verifier = 0;
+    private int totalPasswordLength = 0;
 
-    public MaxLengthValidator(int value) {
+    public MaxLengthValidator(int passwordRule) {
 
-        super(value);
+        super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
     }
 
     @Override
@@ -17,9 +17,9 @@ public class MaxLengthValidator extends PasswordValidator {
 
         var passwordLength = password.length();
 
-        if (passwordLength > value()) {
+        if (passwordLength > passwordRule()) {
 
-            var message = "length cannot exceed required " + value() + " maximum characters.";
+            var message = "length cannot exceed required " + passwordRule() + " maximum characters.";
 
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
@@ -35,28 +35,28 @@ public class MaxLengthValidator extends PasswordValidator {
 
     private Optional<String> validatePasswordRulesAgainstMaxLength(PasswordValidator validator) {
 
-        switch (validator) {
+        switch (validator.category()) {
 
-            case DigitValidator dtv -> verifier += dtv.value();
+            case LENGTH_EXPANDER -> {
 
-            case LowerCaseValidator lcv -> verifier += lcv.value();
+                if (!(validator instanceof MaxLengthValidator)) {
 
-            case UpperCaseValidator ucv -> verifier += ucv.value();
+                    totalPasswordLength += validator.passwordRule();
+                }
+            }
 
-            case SpecialCharacterValidator scv -> verifier += scv.value();
+            case LENGTH_MINIMIZER -> {
 
-            case MinLengthValidator miv -> {
-
-                if (this.value() < miv.value()){
+                if (this.passwordRule() < validator.passwordRule()) {
 
                     return Optional.of("Invalid: Max length less than Min length.");
                 }
             }
 
-            default -> { }
+            case PATTERN_ANALYZER -> {}
         }
 
-        if (verifier > value()) {
+        if (totalPasswordLength > passwordRule()) {
 
             String message = "Invalid: Password length doesn't comply with the rules.";
 

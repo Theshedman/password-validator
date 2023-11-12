@@ -1,11 +1,13 @@
 package com.shedrack.validator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PasswordValidatorManager implements ValidatorManager {
 
-    private final List<PasswordValidator> registeredValidators = new ArrayList<>();
+    private final Set<PasswordValidator> registeredValidators = new HashSet<>();
 
     @Override
     public void register(List<? extends PasswordValidator> newValidators)

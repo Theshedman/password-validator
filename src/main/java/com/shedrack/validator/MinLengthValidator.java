@@ -5,9 +5,9 @@ import java.util.Optional;
 
 public class MinLengthValidator extends PasswordValidator {
 
-    public MinLengthValidator(int value) {
+    public MinLengthValidator(int passwordRule) {
 
-        super(value);
+        super(ValidatorCategory.LENGTH_MINIMIZER, passwordRule);
     }
 
     @Override
@@ -15,9 +15,9 @@ public class MinLengthValidator extends PasswordValidator {
 
         var passwordLength = password.length();
 
-        if (passwordLength < value()) {
+        if (passwordLength < passwordRule()) {
 
-            var message = "length cannot be less than required " + value() + " minimum characters.";
+            var message = "length cannot be less than required " + passwordRule() + " minimum characters.";
 
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
@@ -30,7 +30,7 @@ public class MinLengthValidator extends PasswordValidator {
 
         if (validator instanceof MaxLengthValidator maxLengthValidator) {
 
-            if (this.value() > maxLengthValidator.value()){
+            if (this.passwordRule() > maxLengthValidator.passwordRule()){
 
                 return Optional.of("Invalid: Min length exceeds max length.");
             }

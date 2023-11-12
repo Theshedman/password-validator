@@ -27,7 +27,7 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
         PasswordValidator validator = new MinLengthValidator(6);
         var expectedValue = 6;
 
-        assertThat(validator.value()).isEqualTo(expectedValue);
+        assertThat(validator.passwordRule()).isEqualTo(expectedValue);
     }
 
     @ParameterizedTest(name = "[{index}] password={0}, minLength={1}, expected={2}")
