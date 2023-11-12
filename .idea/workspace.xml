@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added.">
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,28 +41,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.PasswordValidatorTest.executor": "Run",
-    "JUnit.PasswordValidatorTest.getValidatorValue.executor": "Run",
-    "JUnit.PasswordValidatorTest.minimumLength.executor": "Run",
-    "JUnit.PasswordValidatorTest.rejectNegativeValues.executor": "Run",
-    "JUnit.validator in password-validator.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_directory_selection": "C:/Users/Thesh/Documents/projects/password-validator/src/test/java/com/shedrack/validator",
-    "last_opened_file_path": "C:/Users/Thesh/Documents/projects/zigah",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.PasswordValidatorTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordValidatorTest.getValidatorValue.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordValidatorTest.minimumLength.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PasswordValidatorTest.rejectNegativeValues.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.validator in password-validator.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.password-validator [test].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/Thesh/Documents/projects/password-validator/src/test/java/com/shedrack/validator&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Thesh/Documents/projects/zigah&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.shedrack.validator" />
@@ -172,7 +170,8 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="48409000" />
+      <workItem from="1699661718801" duration="52087000" />
+      <workItem from="1699763141825" duration="499000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -278,18 +277,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699753060775</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length.">
+      <option name="closed" value="true" />
+      <created>1699759201456</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699759201456</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor PasswordValidatorTest to use shared manager&#10;&#10;Removed individual declarations of the PasswordValidatorManager in each test method of PasswordValidatorTest. Now a shared validatorManager instance is used, which simplifies the code and reduces redundancy." />
-    <MESSAGE value="Add UpperCaseValidator and corresponding tests&#10;&#10;Implemented a new UpperCaseValidator class to validate uppercase character count in passwords. Updated PasswordValidatorTest to include uppercase validation tests. This addition ensures passwords contain an adequate number of uppercase letters." />
-    <MESSAGE value="Remove overloaded constructor in PasswordValidationConflictException&#10;&#10;Removed the constructor in PasswordValidationConflictException class that takes a message and a Throwable cause as parameters. This change simplifies the code by eliminating an unused constructor." />
-    <MESSAGE value="Your commit message is perfect." />
-    <MESSAGE value="Remove unused constructor in PasswordValidationConflictException&#10;&#10;The code removes an unused constructor from the PasswordValidationConflictException class that previously took a message and a Throwable as input parameters. Simplifying the class to only have necessary components." />
     <MESSAGE value="Add LowerCaseValidator and modify UpperCaseValidator&#10;&#10;Introduced a new class, LowerCaseValidator, to validate the minimum number of lowercase letters in passwords. Additionally, made modifications in the UpperCaseValidator and updated PasswordValidatorTest to include tests for lowercase validation." />
     <MESSAGE value="Add LowerCaseValidator, update tests and refactor &#10;&#10;Implemented a new class, LowerCaseValidator, to validate the minimum number of lowercase letters in passwords. Revised the PasswordValidatorTest to include corresponding tests for lowercase validation. Some minor alterations were also made in the UpperCaseValidator class." />
     <MESSAGE value="Add LowerCaseValidator and corresponding tests&#10;&#10;Added a new LowerCaseValidator class to validate the minimum number of lowercase letters in passwords. Updated the PasswordValidatorTest to include tests for this new validator. Made minor adjustments to the UpperCaseValidator test methodology for consistency." />
@@ -310,6 +312,11 @@
     <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;Converted PasswordValidator from an interface to an abstract class that includes non-negative value verification. Updated the password validators to extend PasswordValidator, enhanced the password validation exceptions handling, and added a new test case to handle negative values." />
     <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;PasswordValidator has been transformed from an interface to an abstract class, including non-negative value enforcement. This also involved restructuring existing password validators to inherit from this newly-created abstract class. Additionally, error handling within password validation has been improved, particularly with the introduction of new password validation exceptions. A new test case has been added to assert that negative values are rejected as expected." />
     <MESSAGE value="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added." />
+    <MESSAGE value="Improve password maximum length validation and tests&#10;&#10;Max length password validation handling has been improved by checking against other rule requirements. Custom exception handling was incorporated within the password validators by transforming the PasswordValidator from an interface to an abstract class including non-negative value enforcement. Also, existing specific validators were updated to inherit from this abstract class. A new test case has been added to handle conflicts in password maximum length." />
+    <MESSAGE value="Refactor max length password validation and tests&#10;&#10;Improved the password maximum length validation by checking it against other validation rules, and introduced exception handling for negative values by converting the PasswordValidator from an interface to an abstract class that enforces non-negative values. Updated the existing password validators to extend the newly created abstract class. In addition, a new test case was added to handle password maximum length conflicts." />
+    <MESSAGE value="Improve password validation and testing&#10;&#10;Enhanced password maximum length validation by comparing it with other validation values. Transformed PasswordValidator into an abstract class that enforces non-negative values, with each specific validator updated to extend this new class. Integrated an extra test case to tackle cases of password maximum length conflicts." />
+    <MESSAGE value="Enhance password max length validation and add conflict testing&#10;&#10;Refined the password max length validation logic by including a comparison with other character type count requirements. Converted PasswordValidator into an abstract class to enforce non-negative values, requiring all specific validators to extend from this class. Added a new test case for handling situations when the password maximum length is in conflict with the sum of all character type counts." />
+    <MESSAGE value="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enhance password validator conflict handling and add tests&#10;&#10;Refactored the MaxLengthValidator to better handle conflicts with other password validation rules. Adjusted PasswordValidatorManager to more optimally add and validate new validators. Added a new data stream in PasswordValidatorTestData and a new test in PasswordValidatorTest for validating password rule conflicts with maximum length." />
   </component>
 </project>
