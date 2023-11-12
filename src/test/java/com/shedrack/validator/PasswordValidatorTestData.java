@@ -111,4 +111,16 @@ abstract class PasswordValidatorTestData {
                 Arguments.of("02mdI$B", 3, 7, 1, 3, 2, 1, false)
         );
     }
+
+    protected static Stream<Arguments> MaxLengthConflictValidationData() {
+
+        // maxLength, specialChars, lowerCase, upperCase, digits
+        return Stream.of(
+                Arguments.of(6, 1, 3, 2, 1),
+                Arguments.of(4, 1, 2, 1, 1),
+                Arguments.of(7, 2, 3, 2, 1),
+                Arguments.of(10, 4, 1, 4, 6),
+                Arguments.of(8, 3, 1, 4, 1)
+        );
+    }
 }

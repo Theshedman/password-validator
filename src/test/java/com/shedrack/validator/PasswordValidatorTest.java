@@ -189,4 +189,34 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
                         .register(new MinLengthValidator(-1))
                 );
     }
+
+    @ParameterizedTest(
+            name = "[{index}] maxLength={0}, numOfSpecialChars={1}, " +
+                    "numOfLowerCase={2}, numOfUpperCase={3}, numOfDigit={4}"
+    )
+    @DisplayName("Should Validate MaxLength Password Conflict")
+    @MethodSource(value = "MaxLengthConflictValidationData")
+    public void validatePasswordRulesAgainstTheMaxLength(
+            int maxLength, int numOfSpecialChars,
+            int numOfLowerCase, int numOfUpperCase, int numOfDigit
+    ) {
+
+        var digitValidator = new DigitValidator(numOfDigit);
+        var maxLengthValidator = new MaxLengthValidator(maxLength);
+        var upperCaseValidator = new UpperCaseValidator(numOfUpperCase);
+        var lowerCaseValidator = new LowerCaseValidator(numOfLowerCase);
+        var specialCharsValidator = new SpecialCharacterValidator(numOfSpecialChars);
+
+        assertThatExceptionOfType(PasswordValidationConflictException.class)
+                .isThrownBy(() ->
+                        passwordValidatorManager.register(
+                                digitValidator,
+                                maxLengthValidator,
+                                upperCaseValidator,
+                                lowerCaseValidator,
+                                specialCharsValidator
+                        )
+                );
+
+    }
 }

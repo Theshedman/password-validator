@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/NegativeValidatorValueException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationException.java" afterDir="false" />
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +172,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="42802000" />
+      <workItem from="1699661718801" duration="48409000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -277,17 +270,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699746872252</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added.">
+      <option name="closed" value="true" />
+      <created>1699753060775</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699753060775</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor password validators and enhance testing &#10;&#10;Updated the password validation process to include digit requirements, introduced via the new DigitValidator class. Also incorporated changes to ValidationResult and updated the tests" />
-    <MESSAGE value="Refactor password validators and enhance tests&#10;&#10;Enhanced password validation by adding a requirement for digits through the implementation of a new class, DigitValidator. Also modified the ValidationResult to accommodate these changes and updated the associated tests to ensure these new requirements are covered." />
-    <MESSAGE value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
-    <MESSAGE value="Add SpecialCharacterValidator with relevant tests&#10;&#10;Implemented a SpecialCharacterValidator to check the minimum number of special characters in passwords. Updated the PasswordValidatorTest to provide test data and verify the functionality of special character validation." />
     <MESSAGE value="Refactor PasswordValidatorTest to use shared manager&#10;&#10;Removed individual declarations of the PasswordValidatorManager in each test method of PasswordValidatorTest. Now a shared validatorManager instance is used, which simplifies the code and reduces redundancy." />
     <MESSAGE value="Add UpperCaseValidator and corresponding tests&#10;&#10;Implemented a new UpperCaseValidator class to validate uppercase character count in passwords. Updated PasswordValidatorTest to include uppercase validation tests. This addition ensures passwords contain an adequate number of uppercase letters." />
     <MESSAGE value="Remove overloaded constructor in PasswordValidationConflictException&#10;&#10;Removed the constructor in PasswordValidationConflictException class that takes a message and a Throwable cause as parameters. This change simplifies the code by eliminating an unused constructor." />
@@ -309,6 +306,10 @@
     <MESSAGE value="Update PasswordValidator tests and data after record removal&#10;&#10;The &quot;Password&quot; record within the validator package was removed to simplify the codebase and improve readability. The corresponding test and data classes, &quot;PasswordValidatorTest&quot; and &quot;PasswordValidatorTestData&quot;, have been revised accordingly to accommodate this change. In addition, raw inputs were added to test data for clarity and the formatting of multi-parameter function calls was improved for better readability." />
     <MESSAGE value="Update PasswordValidator tests and data for clarity&#10;&#10;The commit removes the &quot;Password&quot; record from the validator package to simplify the codebase, and updates &quot;PasswordValidatorTest&quot; and &quot;PasswordValidatorTestData&quot; to reflect this change. It also enhances readability by replacing complex object constructions with raw inputs in test data and improving the formatting of multi-parameter function calls in tests." />
     <MESSAGE value="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls." />
+    <MESSAGE value="Refactor password validators, improve error handling &#10;&#10;Converted PasswordValidator from an interface to abstract class containing non-negative value verification. Updated various validators to extend PasswordValidator. Introduced new exceptions for specific password validation errors and added a new test case to handle negative values." />
+    <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;Converted PasswordValidator from an interface to an abstract class that includes non-negative value verification. Updated the password validators to extend PasswordValidator, enhanced the password validation exceptions handling, and added a new test case to handle negative values." />
+    <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;PasswordValidator has been transformed from an interface to an abstract class, including non-negative value enforcement. This also involved restructuring existing password validators to inherit from this newly-created abstract class. Additionally, error handling within password validation has been improved, particularly with the introduction of new password validation exceptions. A new test case has been added to assert that negative values are rejected as expected." />
+    <MESSAGE value="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added." />
   </component>
 </project>

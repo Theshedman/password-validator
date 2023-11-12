@@ -11,6 +11,13 @@ public class PasswordValidatorManager implements ValidatorManager {
     public void register(List<? extends PasswordValidator> newValidators)
             throws PasswordValidationConflictException {
 
+        addAndValidateValidators(newValidators);
+    }
+
+    private void addAndValidateValidators(List<? extends PasswordValidator> newValidators) {
+
+        registeredValidators.addAll(newValidators);
+
         for (var newValidator : newValidators) {
 
             for (var registeredValidator : registeredValidators) {
@@ -22,8 +29,6 @@ public class PasswordValidatorManager implements ValidatorManager {
                     throw new PasswordValidationConflictException(conflictsMsg.get());
                 }
             }
-
-            registeredValidators.add(newValidator);
         }
     }
 

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 public class MaxLengthValidator extends PasswordValidator {
 
+    private int verifier = 0;
+
     public MaxLengthValidator(int value) {
 
         super(value);
@@ -28,12 +30,37 @@ public class MaxLengthValidator extends PasswordValidator {
     @Override
     public Optional<String> conflictsWith(PasswordValidator validator) {
 
-        if (validator instanceof MinLengthValidator minLengthValidator) {
+        return validatePasswordRulesAgainstMaxLength(validator);
+    }
 
-            if (this.value() < minLengthValidator.value()){
+    private Optional<String> validatePasswordRulesAgainstMaxLength(PasswordValidator validator) {
 
-                return Optional.of("Invalid: Max length less than Min length.");
+        switch (validator) {
+
+            case DigitValidator dtv -> verifier += dtv.value();
+
+            case LowerCaseValidator lcv -> verifier += lcv.value();
+
+            case UpperCaseValidator ucv -> verifier += ucv.value();
+
+            case SpecialCharacterValidator scv -> verifier += scv.value();
+
+            case MinLengthValidator miv -> {
+
+                if (this.value() < miv.value()){
+
+                    return Optional.of("Invalid: Max length less than Min length.");
+                }
             }
+
+            default -> { }
+        }
+
+        if (verifier > value()) {
+
+            String message = "Invalid: Password length doesn't comply with the rules.";
+
+            return Optional.of(message);
         }
 
         return Optional.empty();
