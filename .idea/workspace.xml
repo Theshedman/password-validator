@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Delete Password record from validator package as it's no longer in use.">
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/NegativeValidatorValueException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/DigitValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/LowerCaseValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MaxLengthValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/MinLengthValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidationConflictException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/SpecialCharacterValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/UpperCaseValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/shedrack/validator/PasswordValidatorTestData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +56,7 @@
     "JUnit.PasswordValidatorTest.executor": "Run",
     "JUnit.PasswordValidatorTest.getValidatorValue.executor": "Run",
     "JUnit.PasswordValidatorTest.minimumLength.executor": "Run",
+    "JUnit.PasswordValidatorTest.rejectNegativeValues.executor": "Run",
     "JUnit.validator in password-validator.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -119,6 +129,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="PasswordValidatorTest.rejectNegativeValues" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="password-validator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.shedrack.validator.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.shedrack.validator" />
+      <option name="MAIN_CLASS_NAME" value="com.shedrack.validator.PasswordValidatorTest" />
+      <option name="METHOD_NAME" value="rejectNegativeValues" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="validator in password-validator" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="password-validator" />
       <option name="TEST_OBJECT" value="directory" />
@@ -131,6 +157,7 @@
       <list>
         <item itemvalue="JUnit.validator in password-validator" />
         <item itemvalue="JUnit.PasswordValidatorTest" />
+        <item itemvalue="JUnit.PasswordValidatorTest.rejectNegativeValues" />
         <item itemvalue="JUnit.PasswordValidatorTest.getValidatorValue" />
         <item itemvalue="JUnit.PasswordValidatorTest.minimumLength" />
       </list>
@@ -152,7 +179,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699658778374</updated>
       <workItem from="1699658779869" duration="2828000" />
-      <workItem from="1699661718801" duration="38713000" />
+      <workItem from="1699661718801" duration="42802000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -242,15 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699744833619</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls.">
+      <option name="closed" value="true" />
+      <created>1699746872252</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699746872252</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration." />
-    <MESSAGE value="Refactor password validation and update tests&#10;&#10;Enhanced password validators to account for the new digit requirement and updated ValidationResult to address this new feature. Added a new DigitValidator class to handle digit requirement in passwords. All changes are covered with updated and added tests." />
     <MESSAGE value="Refactor password validators and enhance testing &#10;&#10;Updated the password validation process to include digit requirements, introduced via the new DigitValidator class. Also incorporated changes to ValidationResult and updated the tests" />
     <MESSAGE value="Refactor password validators and enhance tests&#10;&#10;Enhanced password validation by adding a requirement for digits through the implementation of a new class, DigitValidator. Also modified the ValidationResult to accommodate these changes and updated the associated tests to ensure these new requirements are covered." />
     <MESSAGE value="Update password validators to handle digits&#10;&#10;Added a new DigitValidator class to check for digit count in passwords. Adjusted ValidationResult to handle lists of errors instead of a single string message. Updated tests to cover these changes." />
@@ -272,6 +305,10 @@
     <MESSAGE value="Remove Password record from validator package&#10;&#10;The Password record that previously existed in the validator package has been deleted. This change was implemented in order to simplify the validator package and improve the overall readability and maintainability of the codebase." />
     <MESSAGE value="Remove Password.java file&#10;&#10;The Password.java file was removed, thus eliminating the Password record from the validator package. This is a measure taken to make the codebase more straightforward to comprehend and manage, improving code clarity." />
     <MESSAGE value="Delete Password record from validator package as it's no longer in use." />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete Password record from validator package as it's no longer in use." />
+    <MESSAGE value="The Password record was removed from the validator package to simplify the codebase and enhance readability. The removal of this record impacts the PasswordValidatorTest and the PasswordValidatorTestData, and they have been adjusted appropriately to reflect this change." />
+    <MESSAGE value="Update PasswordValidator tests and data after record removal&#10;&#10;The &quot;Password&quot; record within the validator package was removed to simplify the codebase and improve readability. The corresponding test and data classes, &quot;PasswordValidatorTest&quot; and &quot;PasswordValidatorTestData&quot;, have been revised accordingly to accommodate this change. In addition, raw inputs were added to test data for clarity and the formatting of multi-parameter function calls was improved for better readability." />
+    <MESSAGE value="Update PasswordValidator tests and data for clarity&#10;&#10;The commit removes the &quot;Password&quot; record from the validator package to simplify the codebase, and updates &quot;PasswordValidatorTest&quot; and &quot;PasswordValidatorTestData&quot; to reflect this change. It also enhances readability by replacing complex object constructions with raw inputs in test data and improving the formatting of multi-parameter function calls in tests." />
+    <MESSAGE value="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new test case and improve readability of existing code&#10;&#10;Added a new test case to PasswordValidatorTest for complex password validation. Made minor changes to the existing test data in PasswordValidatorTestData for better readability. The readability was also improved on in PasswordValidatorTest by reformatting multi-parameter function calls." />
   </component>
 </project>

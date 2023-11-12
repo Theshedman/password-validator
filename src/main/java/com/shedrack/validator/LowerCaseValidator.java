@@ -2,13 +2,12 @@ package com.shedrack.validator;
 
 import java.util.List;
 
-public class LowerCaseValidator implements PasswordValidator {
+public class LowerCaseValidator extends PasswordValidator {
 
-    private final int lowerCaseCount;
+    public LowerCaseValidator(int value) {
 
-    public LowerCaseValidator(int lowerCaseCount) {
+        super(value);
 
-        this.lowerCaseCount = lowerCaseCount;
     }
 
     private static long numberOfLowerCaseLettersIn(String password) {
@@ -20,17 +19,11 @@ public class LowerCaseValidator implements PasswordValidator {
     }
 
     @Override
-    public int value() {
-
-        return lowerCaseCount;
-    }
-
-    @Override
     public ValidationResult validate(String password) {
 
-        if (numberOfLowerCaseLettersIn(password) < lowerCaseCount) {
+        if (numberOfLowerCaseLettersIn(password) < value()) {
 
-            String message = "must contain at least " + lowerCaseCount + " lowercase letters";
+            String message = "must contain at least " + value() + " lowercase letters";
 
             return new ValidationResult(false, List.of(message));
         }

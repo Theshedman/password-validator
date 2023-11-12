@@ -1,6 +1,6 @@
 package com.shedrack.validator;
 
-public class PasswordValidationConflictException extends IllegalArgumentException {
+public class PasswordValidationConflictException extends PasswordValidationException {
 
     public PasswordValidationConflictException(String message) {
 

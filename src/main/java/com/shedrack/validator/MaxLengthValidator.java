@@ -3,13 +3,11 @@ package com.shedrack.validator;
 import java.util.List;
 import java.util.Optional;
 
-public class MaxLengthValidator implements PasswordValidator {
+public class MaxLengthValidator extends PasswordValidator {
 
-    private final int maxLength;
+    public MaxLengthValidator(int value) {
 
-    public MaxLengthValidator(int maxLength) {
-
-        this.maxLength = maxLength;
+        super(value);
     }
 
     @Override
@@ -17,9 +15,9 @@ public class MaxLengthValidator implements PasswordValidator {
 
         var passwordLength = password.length();
 
-        if (passwordLength > maxLength) {
+        if (passwordLength > value()) {
 
-            var message = "length cannot exceed required " + maxLength + " maximum characters.";
+            var message = "length cannot exceed required " + value() + " maximum characters.";
 
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
@@ -39,11 +37,5 @@ public class MaxLengthValidator implements PasswordValidator {
         }
 
         return Optional.empty();
-    }
-
-    @Override
-    public int value() {
-
-        return maxLength;
     }
 }

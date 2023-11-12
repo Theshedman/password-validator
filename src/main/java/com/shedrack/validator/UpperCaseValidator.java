@@ -2,27 +2,19 @@ package com.shedrack.validator;
 
 import java.util.List;
 
-public class UpperCaseValidator implements PasswordValidator {
+public class UpperCaseValidator extends PasswordValidator {
 
-    private final int upperCaseCount;
+    public UpperCaseValidator(int value) {
 
-    public UpperCaseValidator(int upperCaseCount) {
-
-        this.upperCaseCount = upperCaseCount;
-    }
-
-    @Override
-    public int value() {
-
-        return upperCaseCount;
+        super(value);
     }
 
     @Override
     public ValidationResult validate(String password) {
 
-        if (numberOfUpperCaseLettersIn(password) < upperCaseCount) {
+        if (numberOfUpperCaseLettersIn(password) < value()) {
 
-            String message = "must contain at least " + upperCaseCount + " uppercase letters";
+            String message = "must contain at least " + value() + " uppercase letters";
 
             return new ValidationResult(false, List.of(message));
         }

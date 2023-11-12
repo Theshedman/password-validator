@@ -179,4 +179,14 @@ public class PasswordValidatorTest extends PasswordValidatorTestData {
 
         assertThat(actual.isValid()).isEqualTo(expected);
     }
+
+    @Test
+    @DisplayName("Should Not Accept Negative Values")
+    public void rejectNegativeValues() {
+
+        assertThatExceptionOfType(NegativeValidatorValueException.class)
+                .isThrownBy(() -> passwordValidatorManager
+                        .register(new MinLengthValidator(-1))
+                );
+    }
 }

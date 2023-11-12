@@ -3,13 +3,11 @@ package com.shedrack.validator;
 import java.util.List;
 import java.util.Optional;
 
-public class MinLengthValidator implements PasswordValidator {
+public class MinLengthValidator extends PasswordValidator {
 
-    private final int minLength;
+    public MinLengthValidator(int value) {
 
-    public MinLengthValidator(int minLength) {
-
-        this.minLength = minLength;
+        super(value);
     }
 
     @Override
@@ -17,9 +15,9 @@ public class MinLengthValidator implements PasswordValidator {
 
         var passwordLength = password.length();
 
-        if (passwordLength < minLength) {
+        if (passwordLength < value()) {
 
-            var message = "length cannot be less than required " + minLength + " minimum characters.";
+            var message = "length cannot be less than required " + value() + " minimum characters.";
 
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
@@ -39,11 +37,5 @@ public class MinLengthValidator implements PasswordValidator {
         }
 
         return Optional.empty();
-    }
-
-    @Override
-    public int value() {
-
-        return minLength;
     }
 }

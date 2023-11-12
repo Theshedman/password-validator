@@ -2,29 +2,19 @@ package com.shedrack.validator;
 
 import java.util.List;
 
-public class DigitValidator implements PasswordValidator {
+public class DigitValidator extends PasswordValidator {
 
-    private final int digitCount;
+    public DigitValidator(int value) {
 
-    public DigitValidator(int digitCount) {
-
-        this.digitCount = digitCount;
-    }
-
-    @Override
-    public int value() {
-
-        return digitCount;
+        super(value);
     }
 
     @Override
     public ValidationResult validate(String password) {
 
-        long passwordDigitCount = numberOfDigitsIn(password);
+        if (numberOfDigitsIn(password) < value()) {
 
-        if (passwordDigitCount < digitCount) {
-
-            String message = "must contain at least " + digitCount + " digit(s)";
+            String message = "must contain at least " + value() + " digit(s)";
 
             return new ValidationResult(false, List.of(message));
         }

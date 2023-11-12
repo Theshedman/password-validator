@@ -2,11 +2,34 @@ package com.shedrack.validator;
 
 import java.util.Optional;
 
-public interface PasswordValidator extends Validator {
+public abstract class PasswordValidator implements Validator {
 
-    int value();
+    private final int value;
 
-    default Optional<String> conflictsWith(PasswordValidator validator) {
+    protected PasswordValidator(int value) {
+
+        assertNonNegative(value);
+
+        this.value = value;
+
+    }
+
+    protected int value() {
+
+        return value;
+    }
+
+    private void assertNonNegative(int value) {
+
+        if (value < 0) {
+
+            throw new NegativeValidatorValueException(
+                    "Invalid Input: Negative values not allowed."
+            );
+        }
+    }
+
+    protected Optional<String> conflictsWith(PasswordValidator validator) {
 
         return Optional.empty();
     }
