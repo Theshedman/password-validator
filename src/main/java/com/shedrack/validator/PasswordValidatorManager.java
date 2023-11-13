@@ -48,7 +48,7 @@ public class PasswordValidatorManager implements ValidatorManager {
 
                 invalidCount++;
 
-                validationMessage.addAll(result.message());
+                validationMessage.addAll(result.messages());
             }
         }
 
