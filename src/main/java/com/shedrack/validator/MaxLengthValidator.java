@@ -5,11 +5,11 @@ import java.util.Optional;
 
 public class MaxLengthValidator extends PasswordValidator {
 
-    private int totalPasswordLength = 0;
+    private int accumulatedLength = 0;
 
     public MaxLengthValidator(int passwordRule) {
 
-        super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
+        super(ValidatorCategory.TOTAL_LENGTH_LIMITER, passwordRule);
     }
 
     @Override
@@ -30,33 +30,36 @@ public class MaxLengthValidator extends PasswordValidator {
     @Override
     public Optional<String> conflictsWith(PasswordValidator validator) {
 
-        return validatePasswordRulesAgainstMaxLength(validator);
+        return switch (validator.category()) {
+
+            case LENGTH_EXPANDER -> handleLengthExpanderConflict(validator);
+
+            case LENGTH_MINIMIZER -> handlesLengthMinimizerConflict(validator);
+
+            case PATTERN_ANALYZER, TOTAL_LENGTH_LIMITER -> noConflict();
+        };
     }
 
-    private Optional<String> validatePasswordRulesAgainstMaxLength(PasswordValidator validator) {
+    private Optional<String> handleLengthExpanderConflict(PasswordValidator validator) {
 
-        switch (validator.category()) {
+        accumulatedLength += validator.passwordRule();
 
-            case LENGTH_EXPANDER -> {
+        return verifyMaxLength();
+    }
 
-                if (!(validator instanceof MaxLengthValidator)) {
+    private Optional<String> handlesLengthMinimizerConflict(PasswordValidator validator) {
 
-                    totalPasswordLength += validator.passwordRule();
-                }
-            }
+        if (this.passwordRule() < validator.passwordRule()) {
 
-            case LENGTH_MINIMIZER -> {
-
-                if (this.passwordRule() < validator.passwordRule()) {
-
-                    return Optional.of("Invalid: Max length less than Min length.");
-                }
-            }
-
-            case PATTERN_ANALYZER -> {}
+            return Optional.of("Invalid: Max length less than Min length.");
         }
 
-        if (totalPasswordLength > passwordRule()) {
+        return Optional.empty();
+    }
+
+    private Optional<String> verifyMaxLength() {
+
+        if (accumulatedLength > passwordRule()) {
 
             String message = "Invalid: Password length doesn't comply with the rules.";
 

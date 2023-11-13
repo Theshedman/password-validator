@@ -27,17 +27,22 @@ public abstract class PasswordValidator implements Validator {
         return category;
     }
 
-    private void assertNonNegative(int value) {
+    private void assertNonNegative(int rule) {
 
-        if (value < 0) {
+        if (rule < 0) {
 
             throw new NegativeValidatorValueException(
-                    "Invalid Input: Negative values not allowed."
+                    "Invalid Input: Negative rule not allowed."
             );
         }
     }
 
     protected Optional<String> conflictsWith(PasswordValidator validator) {
+
+        return Optional.empty();
+    }
+
+    protected Optional<String> noConflict() {
 
         return Optional.empty();
     }

@@ -28,12 +28,19 @@ public class MinLengthValidator extends PasswordValidator {
     @Override
     public Optional<String> conflictsWith(PasswordValidator validator) {
 
-        if (validator instanceof MaxLengthValidator maxLengthValidator) {
+        return switch (validator.category()) {
 
-            if (this.passwordRule() > maxLengthValidator.passwordRule()){
+            case TOTAL_LENGTH_LIMITER -> handleTotalLengthLimiterConflict(validator);
 
-                return Optional.of("Invalid: Min length exceeds max length.");
-            }
+            case PATTERN_ANALYZER, LENGTH_EXPANDER, LENGTH_MINIMIZER -> noConflict();
+        };
+    }
+
+    private Optional<String> handleTotalLengthLimiterConflict(PasswordValidator validator) {
+
+        if (this.passwordRule() > validator.passwordRule()){
+
+            return Optional.of("Invalid: Min length exceeds max length.");
         }
 
         return Optional.empty();
