@@ -3,6 +3,9 @@ package com.shedrack.validator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The MaxLengthValidator class validates if the length of a password exceeds a specified maximum length.
+ */
 public class MaxLengthValidator extends PasswordValidator {
 
     private int accumulatedLength = 0;
@@ -12,6 +15,12 @@ public class MaxLengthValidator extends PasswordValidator {
         super(ValidatorCategory.TOTAL_LENGTH_LIMITER, passwordRule);
     }
 
+    /**
+     * Validates a password based on the maximum length rule.
+     *
+     * @param password the password to be validated
+     * @return the validation result which includes whether the password is valid and a list of validation messages
+     */
     @Override
     public ValidationResult validate(String password) {
 
@@ -24,9 +33,15 @@ public class MaxLengthValidator extends PasswordValidator {
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
 
-        return new ValidationResult(Boolean.TRUE, null);
+        return new ValidationResult(Boolean.TRUE, List.of());
     }
 
+    /**
+     * Determines if there is a conflict between the current instance of PasswordValidator and another validator.
+     *
+     * @param validator the other validator to check for conflicts with
+     * @return an Optional containing a message describing the conflict if one exists, otherwise an empty Optional
+     */
     @Override
     public Optional<String> conflictsWith(PasswordValidator validator) {
 
@@ -34,7 +49,7 @@ public class MaxLengthValidator extends PasswordValidator {
 
             case LENGTH_EXPANDER -> handleLengthExpanderConflict(validator);
 
-            case LENGTH_MINIMIZER -> handlesLengthMinimizerConflict(validator);
+            case LENGTH_MINIMIZER -> handleLengthMinimizerConflict(validator);
 
             case PATTERN_ANALYZER, TOTAL_LENGTH_LIMITER -> noConflict();
         };
@@ -47,7 +62,7 @@ public class MaxLengthValidator extends PasswordValidator {
         return verifyMaxLength();
     }
 
-    private Optional<String> handlesLengthMinimizerConflict(PasswordValidator validator) {
+    private Optional<String> handleLengthMinimizerConflict(PasswordValidator validator) {
 
         if (this.passwordRule() < validator.passwordRule()) {
 

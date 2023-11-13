@@ -2,6 +2,10 @@ package com.shedrack.validator;
 
 import java.util.List;
 
+/**
+ * The UpperCaseValidator validates a password based on
+ * the number of uppercase letters it contains.
+ */
 public class UpperCaseValidator extends PasswordValidator {
 
     public UpperCaseValidator(int passwordRule) {
@@ -9,6 +13,13 @@ public class UpperCaseValidator extends PasswordValidator {
         super(ValidatorCategory.LENGTH_EXPANDER, passwordRule);
     }
 
+    /**
+     * Validates a password based on the number of uppercase letters it contains.
+     *
+     * @param password the password to be validated
+     * @return the validation result which includes whether the password is valid
+     *         and a list of validation messages, if any
+     */
     @Override
     public ValidationResult validate(String password) {
 
@@ -16,10 +27,10 @@ public class UpperCaseValidator extends PasswordValidator {
 
             String message = "must contain at least " + passwordRule() + " uppercase letters";
 
-            return new ValidationResult(false, List.of(message));
+            return new ValidationResult(Boolean.FALSE, List.of(message));
         }
 
-        return new ValidationResult(true, List.of());
+        return new ValidationResult(Boolean.TRUE, List.of());
 
     }
 

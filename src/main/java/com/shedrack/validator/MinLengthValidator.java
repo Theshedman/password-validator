@@ -3,6 +3,9 @@ package com.shedrack.validator;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The MinLengthValidator class validates a password based on the minimum length rule specified during instantiation.
+ */
 public class MinLengthValidator extends PasswordValidator {
 
     public MinLengthValidator(int passwordRule) {
@@ -10,6 +13,12 @@ public class MinLengthValidator extends PasswordValidator {
         super(ValidatorCategory.LENGTH_MINIMIZER, passwordRule);
     }
 
+    /**
+     * Validates a password based on the minimum length rule.
+     *
+     * @param password the password to be validated
+     * @return the validation result which includes whether the password is valid and a list of validation messages
+     */
     @Override
     public ValidationResult validate(String password) {
 
@@ -22,9 +31,15 @@ public class MinLengthValidator extends PasswordValidator {
             return new ValidationResult(Boolean.FALSE, List.of(message));
         }
 
-        return new ValidationResult(Boolean.TRUE, null);
+        return new ValidationResult(Boolean.TRUE, List.of());
     }
 
+    /**
+     * Determines if there is a conflict between the current instance of PasswordValidator and another validator.
+     *
+     * @param validator the other validator to check for conflicts with
+     * @return an Optional containing a message describing the conflict if one exists, otherwise an empty Optional
+     */
     @Override
     public Optional<String> conflictsWith(PasswordValidator validator) {
 

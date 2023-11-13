@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Improve password validators and modify ValidatorCategory enum&#10;&#10;Enhanced password validators by introducing 'rule' and 'category'. Updated handle methods in MinLengthValidator and MaxLengthValidator for conflict resolution. Enhanced the clarity of descriptions in ValidatorCategory enum, providing a clearer understanding and classification of password validators.">
+    <list default="true" id="e5743138-b20d-45e8-93bf-b91c4fc158ab" name="Changes" comment="Update methods and attributes in password validation classes&#10;&#10;Changed attribute name from 'message' to 'messages' in ValidationResult class for accurate representation. Also updated the 'addAll' method in PasswordValidatorManager accordingly. Workspace.xml configurations and task descriptions were also modified.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidationResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/ValidationResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/shedrack/validator/PasswordValidatorManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +75,7 @@
       <recent name="com.shedrack.validator.PasswordValidatorTestData" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PasswordValidatorTest">
+  <component name="RunManager" selected="JUnit.validator in password-validator">
     <configuration name="Demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shedrack.validator.Demo" />
       <module name="password-validator" />
@@ -138,8 +138,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PasswordValidatorTest" />
         <item itemvalue="JUnit.validator in password-validator" />
+        <item itemvalue="JUnit.PasswordValidatorTest" />
         <item itemvalue="Application.Demo" />
         <item itemvalue="JUnit.java in password-validator" />
         <item itemvalue="JUnit.PasswordValidatorTest.rejectNegativeValues" />
@@ -165,7 +165,7 @@
       <workItem from="1699661718801" duration="52087000" />
       <workItem from="1699763141825" duration="499000" />
       <workItem from="1699791390890" duration="1221000" />
-      <workItem from="1699820250026" duration="16076000" />
+      <workItem from="1699820250026" duration="17359000" />
     </task>
     <task id="LOCAL-00001" summary="Add PasswordValidator with tests and Maven project configuration&#10;&#10;&#10;Introduces PasswordValidator interface along with MinLengthValidator and MaxLengthValidator implementing classes. Also adds tests for password validation classes and Maven project configuration (pom.xml) file. Makes sure max length cannot be less than min length and vice versa. The commit extracts inputs like java.version, junit.jupiter.version and others to properties for flexible configuration.">
       <option name="closed" value="true" />
@@ -319,16 +319,21 @@
       <option name="project" value="LOCAL" />
       <updated>1699834937121</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Update methods and attributes in password validation classes&#10;&#10;Changed attribute name from 'message' to 'messages' in ValidationResult class for accurate representation. Also updated the 'addAll' method in PasswordValidatorManager accordingly. Workspace.xml configurations and task descriptions were also modified.">
+      <option name="closed" value="true" />
+      <created>1699839425808</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1699839425808</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;Converted PasswordValidator from an interface to an abstract class that includes non-negative value verification. Updated the password validators to extend PasswordValidator, enhanced the password validation exceptions handling, and added a new test case to handle negative values." />
-    <MESSAGE value="Refactor password validators and enhance error handling&#10;&#10;PasswordValidator has been transformed from an interface to an abstract class, including non-negative value enforcement. This also involved restructuring existing password validators to inherit from this newly-created abstract class. Additionally, error handling within password validation has been improved, particularly with the introduction of new password validation exceptions. A new test case has been added to assert that negative values are rejected as expected." />
-    <MESSAGE value="Add custom exception handling to password validators&#10;&#10;Converted PasswordValidator from an interface to an abstract class, updating all existing specifics validators to extend from this abstract class instead of implementing the previous interface. This changes included adding a non-negative value check within the abstract class. Furthermore, a new test case to confirm detection and exception handling of negative values has been added." />
     <MESSAGE value="Improve password maximum length validation and tests&#10;&#10;Max length password validation handling has been improved by checking against other rule requirements. Custom exception handling was incorporated within the password validators by transforming the PasswordValidator from an interface to an abstract class including non-negative value enforcement. Also, existing specific validators were updated to inherit from this abstract class. A new test case has been added to handle conflicts in password maximum length." />
     <MESSAGE value="Refactor max length password validation and tests&#10;&#10;Improved the password maximum length validation by checking it against other validation rules, and introduced exception handling for negative values by converting the PasswordValidator from an interface to an abstract class that enforces non-negative values. Updated the existing password validators to extend the newly created abstract class. In addition, a new test case was added to handle password maximum length conflicts." />
     <MESSAGE value="Improve password validation and testing&#10;&#10;Enhanced password maximum length validation by comparing it with other validation values. Transformed PasswordValidator into an abstract class that enforces non-negative values, with each specific validator updated to extend this new class. Integrated an extra test case to tackle cases of password maximum length conflicts." />
@@ -351,6 +356,9 @@
     <MESSAGE value="Refactor password validators and update category documentation&#10;&#10;Implemented 'rule' and 'category' attributes in password validators for optimized conflict handling, specifically in MinLengthValidator and MaxLengthValidator. Enhanced the documentation of ValidatorCategory for better understanding of different password validator types." />
     <MESSAGE value="Update password validators and revise ValidatorCategory enum&#10;&#10;Refactored password validators to incorporate 'rule' and 'category' attributes, optimizing conflict resolution methods. This includes specific revisions for MinLengthValidator and MaxLengthValidator. Also, improved the documentation of ValidatorCategory enum for better clarity in understanding the different types of password validators." />
     <MESSAGE value="Improve password validators and modify ValidatorCategory enum&#10;&#10;Enhanced password validators by introducing 'rule' and 'category'. Updated handle methods in MinLengthValidator and MaxLengthValidator for conflict resolution. Enhanced the clarity of descriptions in ValidatorCategory enum, providing a clearer understanding and classification of password validators." />
-    <option name="LAST_COMMIT_MESSAGE" value="Improve password validators and modify ValidatorCategory enum&#10;&#10;Enhanced password validators by introducing 'rule' and 'category'. Updated handle methods in MinLengthValidator and MaxLengthValidator for conflict resolution. Enhanced the clarity of descriptions in ValidatorCategory enum, providing a clearer understanding and classification of password validators." />
+    <MESSAGE value="Refactor password validation methods and attribute names&#10;&#10;Updated method and attribute names for consistency in the ValidationResult and PasswordValidatorManager classes. These changes improve readability and maintain code standards throughout the application. Also, updates were made to the workspace.xml file including changes to the configuration and task details." />
+    <MESSAGE value="Update message methods and attribute names in password validation&#10;&#10;This commit refactors attribute names and methods for improved readability and consistency in both ValidationResult and PasswordValidatorManager classes. Additionally, workspace.xml file has been updated, bringing changes to configuration-setting elements and task descriptions." />
+    <MESSAGE value="Update methods and attributes in password validation classes&#10;&#10;Changed attribute name from 'message' to 'messages' in ValidationResult class for accurate representation. Also updated the 'addAll' method in PasswordValidatorManager accordingly. Workspace.xml configurations and task descriptions were also modified." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update methods and attributes in password validation classes&#10;&#10;Changed attribute name from 'message' to 'messages' in ValidationResult class for accurate representation. Also updated the 'addAll' method in PasswordValidatorManager accordingly. Workspace.xml configurations and task descriptions were also modified." />
   </component>
 </project>
